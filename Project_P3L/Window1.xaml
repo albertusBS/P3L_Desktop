@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,19 +25,23 @@
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="16" Margin="0,0,0,5">Add Employee</Label>
         <Label Grid.Row="2">ID</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="50,0,350,0" TextChanged="TextID_TextChanged"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="50,0,350,0" TextChanged="TextID_TextChanged" Name="txtID"></TextBox>
         <Label Grid.Row="3" Margin="0,10,0,0">Name</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextName_TextChanged"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextName_TextChanged" Name="txtName"></TextBox>
         <Label Grid.Row="4" Margin="0,10,0,0">Address</Label>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextAddress_TextChanged"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextAddress_TextChanged" Name="txtAddress"></TextBox>
         <Label Grid.Row="5" Margin="0,10,0,0">Birthdate</Label>
-        <TextBox Grid.Row="5" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextBirthdate_TextChanged"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextBirthdate_TextChanged" Name="txtBirthdate"></TextBox>
         <Label Grid.Row="6" Margin="0,10,0,0">Phone number</Label>
-        <TextBox Grid.Row="6" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextPhone_TextChanged"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextPhone_TextChanged" Name="txtPhone"></TextBox>
         <Label Grid.Row="7" Margin="0,10,0,0">Role</Label>
-        <ComboBox Grid.Row="7" Grid.Column="1" Margin="50,10,350,0" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
+        <ComboBox Grid.Row="7" Grid.Column="1" Margin="50,10,350,0" SelectionChanged="ComboBox_SelectionChanged" Name="role">
+            <ComboBoxItem IsSelected="True">-- Select --</ComboBoxItem>
+            <ComboBoxItem>Cashier</ComboBoxItem>
+            <ComboBoxItem>Customer Service</ComboBoxItem>
+        </ComboBox>
         <Label Grid.Row="8" Margin="0,10,0,0">Password</Label>
-        <TextBox Grid.Row="8" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextPassword_TextChanged"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Margin="50,10,350,0" TextChanged="TextPassword_TextChanged" Name="txtPassword"></TextBox>
         <Button Grid.Row="9" Grid.ColumnSpan="2" Margin="30,20,580,1" Click="Button_Click">Add</Button>
     </Grid>
 </Window>

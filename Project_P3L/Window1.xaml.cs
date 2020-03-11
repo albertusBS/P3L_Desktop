@@ -61,25 +61,20 @@ namespace Project_P3L
 
         }
 
-        private bool AddEmployee(string id, string name, string address, string date, string phoneNumber, string role, string password)
-        {
-            cmd = new MySqlCommand();
-            cmd.CommandText = "INSERT INTO employees VAlUES(@id, @name, @address, @birthdate, @phone, @role, @password;";
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@address", address);
-            cmd.Parameters.AddWithValue("@birthdate", date);
-            cmd.Parameters.AddWithValue("@phone", phoneNumber);
-            cmd.Parameters.AddWithValue("@role", role);
-            cmd.Parameters.AddWithValue("@password", password);
-            MySqlDataReader addEmployee = cmd.ExecuteReader();
-
-            return addEmployee.Read() ? true : false;
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            string id = txtID.Text;
+            string name = txtName.Text;
+            string address = txtAddress.Text;
+            string birthdate = txtBirthdate.Text;
+            string phoneNumber = txtPhone.Text;
+            string role = ;
+            string password;
+        }
+
+        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
