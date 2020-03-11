@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_P3L"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800" Background="#FFF9F9EA">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="39*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="4.5,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TxtUser_TextChanged" Grid.Column="1" Name="txtUser"/>
+        <Label Content="Username    :" HorizontalAlignment="Left" Margin="161,104,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="4.5,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Name="txtPass" TextChanged="TxtPass_TextChanged"/>
+        <Label Content="Password    :" HorizontalAlignment="Left" Margin="161,148,0,0" VerticalAlignment="Top"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="259,194,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.054,-0.375" Click="Button_Click" Grid.ColumnSpan="2" Name="btnLogin"/>
     </Grid>
 </Window>
