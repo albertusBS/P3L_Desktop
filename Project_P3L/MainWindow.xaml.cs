@@ -40,12 +40,12 @@ namespace Project_P3L
             }
         }
 
-        private void dbConnection()
+        public void dbConnection()
         {
             try
             {
-                connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
-                //connection = "SERVER=192.168.19.140;DATABASE=9152;UID=pp9152;PASSWORD=9152;"; //Database Web Server Atma
+                //connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
+                connection = "SERVER=192.168.19.140;DATABASE=9152;UID=pp9152;PASSWORD=9152;"; //Database Web Server Atma
                 conn = new MySqlConnection(connection);
                 conn.Open();
             }
@@ -70,7 +70,8 @@ namespace Project_P3L
             cmd.CommandText = "SELECT * FROM employees WHERE name=@user AND password=@password";
             cmd.Parameters.AddWithValue("@user", name);
             cmd.Parameters.AddWithValue("@password", password);
-            //cmd.Connection = conn;
+
+            cmd.Connection = conn;
             MySqlDataReader login = cmd.ExecuteReader();
 
             return login.Read() ? true : false;
@@ -89,6 +90,7 @@ namespace Project_P3L
                 if (r)
                 {
                     MessageBox.Show("Welcome", "Welcome");
+                    conn.Close();
                     Window1 window = new Window1();
                     this.Close();
                     window.Show();
