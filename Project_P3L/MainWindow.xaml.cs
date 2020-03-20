@@ -44,8 +44,8 @@ namespace Project_P3L
         {
             try
             {
-                //connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
-                connection = "SERVER=192.168.19.140;DATABASE=9152;UID=pp9152;PASSWORD=9152;"; //Database Web Server Atma
+                connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
+                //connection = "SERVER=192.168.19.140;DATABASE=9152;UID=pp9152;PASSWORD=9152;"; //Database Web Server Atma
                 conn = new MySqlConnection(connection);
                 conn.Open();
             }
@@ -64,7 +64,7 @@ namespace Project_P3L
 
         }
 
-        private bool validateLogin(string name, string password)
+        private bool ValidateLogin(string name, string password)
         {
             cmd = new MySqlCommand();
             cmd.CommandText = "SELECT * FROM employees WHERE name=@user AND password=@password";
@@ -77,7 +77,8 @@ namespace Project_P3L
             return login.Read() ? true : false;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUser.Text;
             string password = txtPass.Text;
@@ -86,18 +87,27 @@ namespace Project_P3L
                 MessageBox.Show("Please Fill the Field", "Warning");
             else
             {
-                bool r = validateLogin(username, password);
+                bool r = ValidateLogin(username, password);
                 if (r)
                 {
                     MessageBox.Show("Welcome", "Welcome");
                     conn.Close();
-                    Window1 window = new Window1();
+                    AddEmployees window = new AddEmployees();
                     this.Close();
                     window.Show();
                 }
                 else
+                {
                     MessageBox.Show("Invalid Username or Password", "Warning");
+                    conn.Close();
+                }
             }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            txtUser.Clear();
+            txtPass.Clear();
         }
     }
 }

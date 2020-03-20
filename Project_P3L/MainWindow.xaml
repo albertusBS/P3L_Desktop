@@ -6,15 +6,30 @@
         xmlns:local="clr-namespace:Project_P3L"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" Background="#FFF9F9EA">
-    <Grid>
+    <Grid Margin="100" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="22*"/>
-            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="4.5,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TxtUser_TextChanged" Grid.Column="1" Name="txtUser"/>
-        <Label Content="Username    :" HorizontalAlignment="Left" Margin="161,104,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="4.5,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Name="txtPass" TextChanged="TxtPass_TextChanged"/>
-        <Label Content="Password    :" HorizontalAlignment="Left" Margin="161,148,0,0" VerticalAlignment="Top"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="259,194,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.054,-0.375" Click="Button_Click" Grid.ColumnSpan="2" Name="btnLogin"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.ColumnSpan="2" Margin="15"  HorizontalAlignment="Center" FontSize="28" FontWeight="Bold">KOUVEE PET SHOP</Label>
+
+        <Label Grid.Row="1" Content="ID              :" Margin="100,10,20,10"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="20,10,50,10" Width="150" TextChanged="TxtUser_TextChanged" Name="txtUser"/>
+        
+        <Label Grid.Row="2" Content="Password   :" Margin="100,10,20,10"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="20,10,50,10" Width="150" TextChanged="TxtPass_TextChanged" Name="txtPass"/>
+        
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Padding="20,3,20,3"  Margin="10" Content="Login"  Name="btnLogin" Click="BtnLogin_Click"/>
+            <Button Padding="20,3,20,3"  Margin="10" Content="Cancel"  Name="btnCancel" Click="BtnCancel_Click"/>
+        </StackPanel>
+        
     </Grid>
 </Window>
