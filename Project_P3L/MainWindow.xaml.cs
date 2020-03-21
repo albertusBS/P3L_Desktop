@@ -92,7 +92,7 @@ namespace Project_P3L
                 {
                     MessageBox.Show("Welcome", "Welcome");
                     conn.Close();
-                    AddEmployees window = new AddEmployees();
+                    Employees window = new Employees();
                     this.Close();
                     window.Show();
                 }

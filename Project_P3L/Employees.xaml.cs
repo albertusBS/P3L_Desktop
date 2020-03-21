@@ -19,13 +19,14 @@ namespace Project_P3L
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class AddEmployees : Window
+    public partial class Employees : Window
     {
         private string connection;
         private MySqlConnection conn;
+        private DataTable dt;
         MySqlCommand cmd;
 
-        public AddEmployees()
+        public Employees()
         {
             InitializeComponent();
             try
@@ -36,7 +37,7 @@ namespace Project_P3L
                 dbConnection();
 
                 cmd.Connection = conn;
-                DataTable dt = new DataTable();
+                dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
                 conn.Close();
 
@@ -93,8 +94,7 @@ namespace Project_P3L
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var ComboBox = sender as ComboBox;
-            //string value = ComboBox.SelectedItem as string;
+
         }
 
         private void TextPassword_TextChanged(object sender, TextChangedEventArgs e)
@@ -102,8 +102,10 @@ namespace Project_P3L
 
         }
 
-        public bool addEmployees(string id, string name, string address, string birthDate, string phoneNumber, string role, string password)
+        public bool AddEmployees(string id, string name, string address, string birthDate, string phoneNumber, string role, string password)
         {
+            MySqlDataReader add;
+
             dbConnection();
             cmd = new MySqlCommand();
             cmd.CommandText = "INSERT INTO employees(id, name, address, birthdate, phone_number, role, password) VALUES (@id,@name,@address,@birthdate,@phone_number,@role,@password)";
@@ -113,11 +115,11 @@ namespace Project_P3L
             cmd.Parameters.AddWithValue("@birthdate", birthDate);
             cmd.Parameters.AddWithValue("@phone_number", phoneNumber);
             cmd.Parameters.AddWithValue("@role", role);
-            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@password", password.GetHashCode());
 
             cmd.Connection = conn;
 
-            MySqlDataReader add = cmd.ExecuteReader();
+            add = cmd.ExecuteReader();
             return add.Read() ? true : false;
         }
 
@@ -126,7 +128,7 @@ namespace Project_P3L
             string id = txtID.Text;
             string name = txtName.Text;
             string address = txtAddress.Text;
-            string birthDate = txtBirthdate.SelectedDate.Value.ToShortDateString();
+            string birthDate = datePicker.SelectedDate.Value.ToString("yyyy-MM-dd");
             string phoneNumber = txtPhone.Text;
             string role = ((ComboBoxItem)ComBoRole.SelectedItem).Content.ToString();
             string password = txtPassword.Text;
@@ -135,13 +137,26 @@ namespace Project_P3L
                 MessageBox.Show("Please fill all the field", "Warning");
             else
             {
-                bool a = addEmployees(id, name, address, birthDate, phoneNumber, role, password);
-                if (a)
+                try
                 {
-                    MessageBox.Show("Successful", "Successful input");
-                    conn.Close();
+                    bool a = AddEmployees(id, name, address, birthDate, phoneNumber, role, password);
                 }
+                catch(MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message, "Duplicate Data");
+                }
+                
+                MessageBox.Show("Successful", "Successful input");
+
+                conn.Open();
+                cmd = new MySqlCommand("SELECT * FROM  employees");
+                dataGrid.Items.Refresh();
+                dt.Load(cmd.ExecuteReader());
+
+                conn.Close();
                 ClearTextBox();
+
+                dataGrid.DataContext = dt;
             }
         }
 
@@ -162,6 +177,38 @@ namespace Project_P3L
             txtAddress.Clear();
             txtPhone.Clear();
             txtPassword.Clear();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView selectedRow = dg.SelectedItem as DataRowView;
+
+            if(selectedRow != null)
+            {
+                txtID.Text = selectedRow["id"].ToString();
+                txtName.Text = selectedRow["name"].ToString();
+                txtAddress.Text = selectedRow["address"].ToString();
+                datePicker.Text = selectedRow["birthdate"].ToString();
+                txtPhone.Text = selectedRow["phone_number"].ToString();
+                ComBoRole.Text = selectedRow["role"].ToString();
+                txtPassword.Text = selectedRow["password"].ToString();
+            }
+        }
+
+        private void TxtBirtdate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+
+            DateTime? date = picker.SelectedDate;
+        }
+
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if(e.PropertyType == typeof(System.DateTime))
+            {
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd-MM-yyyy";
+            }
         }
     }
 }
