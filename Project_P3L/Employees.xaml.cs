@@ -57,7 +57,7 @@ namespace Project_P3L
         }
 
         public void dbConnection()
-        {
+        {   //Fungsi untuk membuka koneksi ke database
             try
             {
                 connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
@@ -112,7 +112,7 @@ namespace Project_P3L
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {   //Fungsi yang digunakan untuk menaruh data dari data grid ke text box
             DataGrid dg = (DataGrid)sender;
             DataRowView selectedRow = dg.SelectedItem as DataRowView;
 
@@ -130,7 +130,7 @@ namespace Project_P3L
         }
 
         private void RefreshDataGrid()
-        {
+        {   //Fungsi untuk me-refresh data grid
             dbConnection();
             cmd = new MySqlCommand("SELECT * FROM employees");
 
@@ -144,7 +144,7 @@ namespace Project_P3L
         }
 
         private void ClearTextBox()
-        {
+        {   //Fungsi untuk mengosongkan text box
             txtID.Clear();
             txtID.IsEnabled = true;
             txtName.Clear();
@@ -156,7 +156,7 @@ namespace Project_P3L
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
+        {   //Fungsi untuk memformat tanggal data pada data grid
             if (e.PropertyType == typeof(System.DateTime))
             {
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd-MM-yyyy";
@@ -164,7 +164,7 @@ namespace Project_P3L
         }
 
         public bool AddEmployees(string id, string name, string address, string birthDate, string phoneNumber, string role, string password)
-        {
+        {   //Fungsi untuk memasukkan data ke database melalui parameter
             dbConnection();
             cmd = new MySqlCommand();
             cmd.CommandText = "INSERT INTO employees(id, name, address, birthdate, phone_number, role, password) VALUES (@id,@name,@address,@birthdate,@phone_number,@role,@password)";
@@ -183,7 +183,7 @@ namespace Project_P3L
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
+        {   //Fungsi untuk menambahkan data pegawai
             string id = txtID.Text;
             string name = txtName.Text;
             string address = txtAddress.Text;
@@ -212,7 +212,7 @@ namespace Project_P3L
         }
 
         private bool EditEmployees(string id, string name, string address, string birthDate, string phoneNumber, string role, string password)
-        {
+        {   //Fungsi untuk mengubah data ke database melalui parameter
             dbConnection();
 
             cmd = new MySqlCommand();
@@ -233,7 +233,7 @@ namespace Project_P3L
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
+        {   //Fungsi untuk meng-edit data pegawai
             string id = txtID.Text;
             string temp = id;
             string name = txtName.Text;
@@ -259,7 +259,7 @@ namespace Project_P3L
         }
 
         private bool DeleteEmployees(string id)
-        {
+        {   //Fungsi untuk memnghapus data ke database melalui parameter
             dbConnection();
 
             cmd = new MySqlCommand();
@@ -274,7 +274,7 @@ namespace Project_P3L
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
+        {   //Fungsi untuk menghapus data pegawai
             string id = txtID.Text;
 
             if (id == "")
@@ -290,7 +290,7 @@ namespace Project_P3L
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
+        {   //Fungsi yang digunakan jika tidak jadi menambah, mengubah, dan menghapus data pegawai
             ClearTextBox();
         }
     }

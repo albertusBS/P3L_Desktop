@@ -21,7 +21,7 @@
         <Label Grid.ColumnSpan="2" Margin="15"  HorizontalAlignment="Center" FontSize="28" FontWeight="Bold">KOUVEE PET SHOP</Label>
 
         <Label Grid.Row="1" Content="ID              :" Margin="100,10,20,10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="20,10,50,10" Width="150" TextChanged="TxtUser_TextChanged" Name="txtUser"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="20,10,50,10" Width="150" TextChanged="TxtID_TextChanged" Name="txtID"/>
         
         <Label Grid.Row="2" Content="Password   :" Margin="100,10,20,10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="20,10,50,10" Width="150" TextChanged="TxtPass_TextChanged" Name="txtPass"/>

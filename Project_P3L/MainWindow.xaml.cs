@@ -41,7 +41,7 @@ namespace Project_P3L
         }
 
         public void dbConnection()
-        {
+        {   //Fungsi untuk koneksi ke database
             try
             {
                 connection = "SERVER=localhost;DATABASE=pet_shop;UID=root;PASSWORD=;"; //Database Localhost
@@ -54,7 +54,7 @@ namespace Project_P3L
                 throw;
             }
         }
-        private void TxtUser_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TxtID_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
@@ -64,12 +64,12 @@ namespace Project_P3L
 
         }
 
-        private bool ValidateLogin(string name, string password)
-        {
+        private bool ValidateLogin(string id, string password)
+        {   //Fungsi untuk memvalidasi login
             dbConnection();
             cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT * FROM employees WHERE name=@user AND password=@password";
-            cmd.Parameters.AddWithValue("@user", name);
+            cmd.CommandText = "SELECT * FROM employees WHERE id=@id AND password=@password";
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@password", password);
 
             cmd.Connection = conn;
@@ -80,15 +80,15 @@ namespace Project_P3L
 
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            string username = txtUser.Text;
+        {   //Fungsi button untuk login
+            string id = txtID.Text;
             string password = txtPass.Text;
 
-            if (username == "" || password == "")
+            if (id == "" || password == "")
                 MessageBox.Show("Please Fill the Field", "Warning");
             else
             {
-                bool r = ValidateLogin(username, password);
+                bool r = ValidateLogin(id, password);
                 if (r)
                 {
                     MessageBox.Show("Welcome", "Welcome");
@@ -106,8 +106,8 @@ namespace Project_P3L
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            txtUser.Clear();
+        {   //Fungsi yang digunakan jika user tidak jadi atau ingin menghapus id dan password
+            txtID.Clear();
             txtPass.Clear();
         }
     }
