@@ -66,6 +66,7 @@ namespace Project_P3L
 
         private bool ValidateLogin(string name, string password)
         {
+            dbConnection();
             cmd = new MySqlCommand();
             cmd.CommandText = "SELECT * FROM employees WHERE name=@user AND password=@password";
             cmd.Parameters.AddWithValue("@user", name);
