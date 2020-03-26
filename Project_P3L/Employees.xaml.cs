@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace Project_P3L
         private string connection;
         private MySqlConnection conn;
         private DataTable dt;
+        //private ICollectionView dataGridCollection;
+        private string filterString;
         MySqlCommand cmd;
 
         public Employees()
@@ -127,6 +130,13 @@ namespace Project_P3L
                 ComBoRole.Text = selectedRow["role"].ToString();
                 txtPassword.Text = selectedRow["password"].ToString();
             }
+        }
+
+        private void TextSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {   //Fungsi untuk mencari pegawai sesuai nama
+            DataView dv = new DataView(dt);
+            dv.RowFilter = string.Format("name LIKE '%{0}%'", txtSearch.Text);
+            dataGrid.DataContext = dv;
         }
 
         private void RefreshDataGrid()
